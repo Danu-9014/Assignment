@@ -23,8 +23,11 @@ const bookModel = new dynamoose.Schema(
         type: Number,
         required: false,
     },
+    noOfPages: {
+      type: Number,
+      required: true,
+    },
   },
-  { timestamps: true }
 );
 const Book = dynamoose.model("Book", bookModel);
 

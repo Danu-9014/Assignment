@@ -1,5 +1,4 @@
 const dynamoose = require("dynamoose");
-const Book = require("./bookModel");
 const userModel = new dynamoose.Schema(
   {
     id: {
@@ -15,22 +14,91 @@ const userModel = new dynamoose.Schema(
       required: true,
       enum: ["Reader", "Auther"],
     },
-
     readingBook: {
-      type: Set,
-      schema: [Book],
+      type: Object,
+      schema: {
+        bookId: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        noOfPages: {
+          type: Number,
+          required: true,
+        },
+        author: {
+            type: String,
+            required: true,
+        },
+        category: {
+            type: String,
+            required: true,
+        },
+        rating:{
+            type: Number,
+            required: false,
+        },
+      },
     },
     noOfPagesRead: {
       type: Number,
     },
-    completedBooks: [
-      {
-        type: Set,
-        schema: [Book],
-      },
-    ],
-  },
-  { timestamps: true }
+    completedBooks: {
+      type: Array,
+      schema: [{
+            type: Object,
+            schema: {
+              bookId: {
+                type: String,
+                required: true,
+              },
+              name: {
+                type: String,
+                required: true,
+              },
+              noOfPages: {
+                type: Number,
+                required: true,
+              },
+              author: {
+                  type: String,
+                  required: true,
+              },
+              category: {
+                  type: String,
+                  required: true,
+              },
+              rating:{
+                  type: Number,
+                  required: false,
+              },
+            },
+        }]
+    },
+    sessions: {
+      type: Array,
+      schema: [{
+            type: Object,
+            schema: {
+              sessionStart: {
+                type: Date,
+                required: true,
+              },
+              sessionEnd: {
+                type: Date,
+                required: true,
+              },
+            },
+        }]
+    },
+    createdDate: {
+      type: Date,
+      default: Date.now()
+    }
+  }
 );
 const User = dynamoose.model("User", userModel);
 

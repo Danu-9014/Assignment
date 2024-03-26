@@ -22,7 +22,7 @@ const createBook = async (req,res) => {
 //Get all books
 const getAllBooks = async (req,res) => {
     const {success , data} = await readAllBooks();
-    console.log("Data of getAllBooks",data);
+    // console.log("Data of getAllBooks",data);
     if(success){
       return res.json({ success, data });        
     }
@@ -42,9 +42,9 @@ const getBook = async (req,res) => {
 //Update book
 const updateBook = async (req, res) => {
     const bookData = req.body;
-    const user = new Book(bookData);
+    const book = new Book(bookData);
     const { id } = req.params;
-    user.id = id;
+    book.bookId = id;
   
     const { success, data } = await createOrUpdate(book);
   
