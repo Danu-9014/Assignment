@@ -4,6 +4,7 @@ const app = express();
 const dotenv = require('dotenv');
 const axios = require('axios');
 const cron = require('node-cron');
+const uuid = require('uuid');
 
 const corsOptions = {
     origin: '*',
@@ -16,9 +17,12 @@ app.use(cors(corsOptions));
 dotenv.config();
 app.use(express.json());
 
+const resultRouter = require('./routes/results');
+app.use("/api",resultRouter);
+
 
 // Define the cron job
-cron.schedule('0 0 * * *', async () => {
+cron.schedule('5 12 * * *', async () => {
     console.log('Aggregator service running...');
 
     try {
@@ -38,6 +42,20 @@ cron.schedule('0 0 * * *', async () => {
         const averageRatingsByAuthor = calculateAverageRatings(bookData);
         console.log("Average ratings for each author:");
         console.log(averageRatingsByAuthor);
+
+        // Generate a unique result ID
+        const resultId = uuid.v4();
+
+        // Construct the result object
+        const resultObject = {
+            resultId: resultId,
+            averageSessionDuration: aggregatedResults, 
+            averageRating: averageRatingsByAuthor 
+        };
+
+        // Call the create result API
+        const createResponse = await axios.post('http://localhost:5005/api/result', resultObject);
+        console.log('Result created successfully:', createResponse.data);
 
     } catch (error) {
         console.error('Error fetching data:', error.message);
