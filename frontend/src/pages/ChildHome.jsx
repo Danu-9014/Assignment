@@ -115,14 +115,16 @@ const ChildHome = () => {
                 <br />
                 <div data-aos="fade-up" data-aos-delay="600">
                   <div className="text-center text-lg-start">
-                    <button
-                      type="button"
-                      class="btn btn-outline-danger btn-rounded"
-                      data-mdb-ripple-init
-                      data-mdb-ripple-color="dark"
-                    >
-                      Get Started!
-                    </button>
+                    <Link to={`/childbook`}>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger btn-rounded"
+                        data-mdb-ripple-init
+                        data-mdb-ripple-color="dark"
+                      >
+                        Get Started!
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

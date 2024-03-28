@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "../assets/logo.jpg"; 
+import { Link } from "react-router-dom";
 
 const MainNavBar = () => {
   return (
@@ -23,7 +24,7 @@ const MainNavBar = () => {
         </button>
 
         {/* <!-- Brand --> */}
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img src={logo} height="30" alt="" loading="lazy" />
         </a>
         {/* <!-- Search form --> */}
@@ -44,20 +45,24 @@ const MainNavBar = () => {
         <ul class="navbar-nav ms-auto d-flex flex-row">
           {/* <!-- Notification dropdown --> */}
           <li class="nav-item dropdown">
-            <button
-              type="button"
-              className="btn btn-light me-3"
-              style={{ width: "100px", height: "35px", fontSize: "13px" }}
-            >
-              Login
-            </button>
-            <button
-              type="button"
-              className="btn btn-light me-3"
-              style={{ width: "100px", height: "35px", fontSize: "13px" }}
-            >
-              Sign Up
-            </button>
+            <Link to={`/login`}>
+              <button
+                type="button"
+                className="btn btn-light me-3"
+                style={{ width: "100px", height: "35px", fontSize: "13px" }}
+              >
+                Login
+              </button>
+            </Link>
+            <Link to={`/register`}>
+              <button
+                type="button"
+                className="btn btn-light me-3"
+                style={{ width: "100px", height: "35px", fontSize: "13px" }}
+              >
+                Sign Up
+              </button>
+            </Link>
           </li>
 
 

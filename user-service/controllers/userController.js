@@ -9,9 +9,9 @@ const {
 
 // Create User
 const createUser = async (req, res) => {
-  const {id, userType, name} = req.body; 
+  const {id, userType, name, password} = req.body; 
   const createdDate = new Date().toISOString();
-  const user = new User({id, userType, name, createdDate});  
+  const user = new User({id, userType, name, password, createdDate});  
   const { success, data } = await createOrUpdate(user);
   if (success) {
     return res.json({ success, data });

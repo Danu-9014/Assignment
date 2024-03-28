@@ -9,10 +9,14 @@ const userModel = new dynamoose.Schema(
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     userType: {
       type: String,
       required: true,
-      enum: ["Reader", "Auther"],
+      enum: ["Reader", "Author"],
     },
     readingBook: {
       type: Object,
